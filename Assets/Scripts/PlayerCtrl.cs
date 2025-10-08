@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    public CharacterController charCtrl;
     public int HP;
 
     //初始化
@@ -15,6 +16,6 @@ public class PlayerCtrl : MonoBehaviour
     //更新：偵測操作
     void Update()
     {
-        
+        charCtrl.SimpleMove(Vector3.forward);
     }
 }
