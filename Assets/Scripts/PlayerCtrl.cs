@@ -16,6 +16,7 @@ public class PlayerCtrl : MonoBehaviour
     //更新：偵測操作
     void Update()
     {
-        charCtrl.SimpleMove(Vector3.forward);
+        //當(輸入按鍵W壓下) 角色控制器.移動(往前)
+        if (Input.GetKey(KeyCode.W)) charCtrl.SimpleMove(Vector3.forward);
     }
 }
