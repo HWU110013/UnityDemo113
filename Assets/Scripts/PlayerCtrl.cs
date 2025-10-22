@@ -20,6 +20,13 @@ public class PlayerCtrl : MonoBehaviour
     Vector3 look;
     #endregion 基本參數
 
+    #region 角色公開狀態
+    /// <summary>
+    /// 角色是否有接收輸入操作
+    /// </summary>
+    public bool isMove => input != Vector2.zero;
+    #endregion 角色公開狀態
+
     #region UNITY生命週期
     /// <summary>
     /// 初始化
@@ -48,14 +55,13 @@ public class PlayerCtrl : MonoBehaviour
         look.z = input.y;
         look.x = input.x;
         transform.rotation = Quaternion.LookRotation(look);
-        //角色前進
+        //角色控制器.移動(往前)
+        if (isMove) charCtrl.SimpleMove(transform.forward);
     }
 
     public void Move(CallbackContext callback)
     {
-        input = callback.ReadValue<Vector2>();
-        //角色控制器.移動(往前)
-        charCtrl.SimpleMove(Vector3.forward);
+        input = callback.ReadValue<Vector2>(); 
     }
     #endregion 操作設計
 }
