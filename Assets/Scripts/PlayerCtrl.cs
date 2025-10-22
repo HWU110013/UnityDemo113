@@ -9,26 +9,51 @@ public class PlayerCtrl : MonoBehaviour
 {
     #region 基本參數
     public CharacterController charCtrl;
+    /// <summary>
+    /// 角色的血量
+    /// </summary>
     public int HP;
+    /// <summary>
+    /// 搖桿外部輸入
+    /// </summary>
+    Vector2 input;
+    Vector3 look;
     #endregion 基本參數
 
     #region UNITY生命週期
-    //初始化
+    /// <summary>
+    /// 初始化
+    /// </summary>
     void Start()
     {
         HP = 100;
     }
 
-    //更新：偵測操作
+    /// <summary>
+    /// 更新：偵測操作
+    /// </summary>
     void Update()
     {
-
+        Action();
     }
     #endregion UNITY生命週期
 
     #region 操作設計
+    /// <summary>
+    /// 角色行動
+    /// </summary>
+    void Action()
+    {
+        //轉動角色
+        look.z = input.y;
+        look.x = input.x;
+        transform.rotation = Quaternion.LookRotation(look);
+        //角色前進
+    }
+
     public void Move(CallbackContext callback)
     {
+        input = callback.ReadValue<Vector2>();
         //角色控制器.移動(往前)
         charCtrl.SimpleMove(Vector3.forward);
     }
