@@ -7,9 +7,12 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    #region 基本參數
     public CharacterController charCtrl;
     public int HP;
+    #endregion 基本參數
 
+    #region UNITY生命週期
     //初始化
     void Start()
     {
@@ -21,10 +24,13 @@ public class PlayerCtrl : MonoBehaviour
     {
 
     }
+    #endregion UNITY生命週期
 
+    #region 操作設計
     public void Move(CallbackContext callback)
     {
         //角色控制器.移動(往前)
         charCtrl.SimpleMove(Vector3.forward);
     }
+    #endregion 操作設計
 }
