@@ -9,6 +9,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     #region 基本參數
     public CharacterController charCtrl;
+    public Animator animator;
     /// <summary>
     /// 角色的血量
     /// </summary>
@@ -42,6 +43,7 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         Action();
+        animator.SetBool("IsMove", isMove);
     }
     #endregion UNITY生命週期
 
