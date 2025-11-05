@@ -11,6 +11,10 @@ public class PlayerCtrl : MonoBehaviour
     public CharacterController charCtrl;
     public Animator animator;
     /// <summary>
+    /// 角色移動速度
+    /// </summary>
+    public float moveSpeed = 3f;
+    /// <summary>
     /// 角色的血量
     /// </summary>
     public int HP;
@@ -44,6 +48,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         Action();
         animator.SetBool("IsMove", isMove);
+        animator.SetFloat("BlendInput", input.magnitude);
     }
     #endregion UNITY生命週期
 
@@ -56,14 +61,21 @@ public class PlayerCtrl : MonoBehaviour
         //轉動角色
         look.z = input.y;
         look.x = input.x;
-        transform.rotation = Quaternion.LookRotation(look);
-        //角色控制器.移動(往前)
-        if (isMove) charCtrl.SimpleMove(transform.forward);
+
+        //有移動操作產生時
+        if (isMove)
+        {
+            //角色控制框轉向操作方向
+            transform.rotation = Quaternion.LookRotation(look);
+            //角色控制器.移動(往前)
+            charCtrl.SimpleMove(transform.forward * moveSpeed * input.magnitude);
+        }
     }
 
     public void Move(CallbackContext callback)
     {
-        input = callback.ReadValue<Vector2>(); 
+        input = callback.ReadValue<Vector2>();
+        Debug.Log(input);
     }
     #endregion 操作設計
 }
