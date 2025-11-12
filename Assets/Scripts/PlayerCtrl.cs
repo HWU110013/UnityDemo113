@@ -30,6 +30,8 @@ public class PlayerCtrl : MonoBehaviour
     /// 角色是否有接收輸入操作
     /// </summary>
     public bool isMove => input != Vector2.zero;
+
+    public bool isGrounded => charCtrl.isGrounded;
     #endregion 角色公開狀態
 
     #region UNITY生命週期
@@ -61,7 +63,7 @@ public class PlayerCtrl : MonoBehaviour
         //轉動角色
         look.z = input.y;
         look.x = input.x;
-
+        
         //有移動操作產生時
         if (isMove)
         {
@@ -70,12 +72,23 @@ public class PlayerCtrl : MonoBehaviour
             //角色控制器.移動(往前)
             charCtrl.SimpleMove(transform.forward * moveSpeed * input.magnitude);
         }
+        //地心引力
+
     }
 
     public void Move(CallbackContext callback)
     {
         input = callback.ReadValue<Vector2>();
         Debug.Log(input);
+    }
+
+    public void Jump(CallbackContext callback)
+    {
+        //從地面起跳
+        if (isGrounded && callback.performed)
+        {
+            Debug.Log("從地面起跳");
+        }
     }
     #endregion 操作設計
 }
