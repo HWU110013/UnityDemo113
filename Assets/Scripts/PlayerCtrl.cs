@@ -83,8 +83,8 @@ public class PlayerCtrl : MonoBehaviour
             //角色控制器.移動(往前)
             charCtrl.SimpleMove(transform.forward * moveSpeed * input.magnitude);
         }
-        //地心引力
-        speedV -= G;
+        //地心引力(標準化 1/FPS)
+        speedV -= G * Time.deltaTime;
         charCtrl.Move(Vector3.up * speedV * Time.deltaTime);
     }
 
