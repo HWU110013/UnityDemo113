@@ -15,6 +15,10 @@ public class PlayerCtrl : MonoBehaviour
     /// </summary>
     public float moveSpeed = 3f;
     /// <summary>
+    /// 角色跳躍高度
+    /// </summary>
+    public float jumpHeight = 2f;
+    /// <summary>
     /// 角色的血量
     /// </summary>
     public int HP;
@@ -23,6 +27,7 @@ public class PlayerCtrl : MonoBehaviour
     /// </summary>
     Vector2 input;
     Vector3 look;
+    float speedV;
     #endregion 基本參數
 
     #region 角色公開狀態
@@ -30,8 +35,14 @@ public class PlayerCtrl : MonoBehaviour
     /// 角色是否有接收輸入操作
     /// </summary>
     public bool isMove => input != Vector2.zero;
-
+    /// <summary>
+    /// 是否接觸地面
+    /// </summary>
     public bool isGrounded => charCtrl.isGrounded;
+    /// <summary>
+    /// 重力常數
+    /// </summary>
+    public float G => 9.8f;
     #endregion 角色公開狀態
 
     #region UNITY生命週期
@@ -73,7 +84,8 @@ public class PlayerCtrl : MonoBehaviour
             charCtrl.SimpleMove(transform.forward * moveSpeed * input.magnitude);
         }
         //地心引力
-
+        speedV -= G;
+        charCtrl.Move(Vector3.up * speedV * Time.deltaTime);
     }
 
     public void Move(CallbackContext callback)
@@ -88,6 +100,7 @@ public class PlayerCtrl : MonoBehaviour
         if (isGrounded && callback.performed)
         {
             Debug.Log("從地面起跳");
+            speedV = Mathf.Sqrt(2 * jumpHeight * G);
         }
     }
     #endregion 操作設計

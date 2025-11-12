@@ -556,6 +556,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charCtrl: {fileID: 1950800565}
   animator: {fileID: 508722840}
+  moveSpeed: 3
+  jumpHeight: 2
   HP: 99999999
 --- !u!4 &1950800564
 Transform:
@@ -641,6 +643,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1ac7857e-f620-4edb-b859-e45802bf5f85
     m_ActionName: Play/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1950800560}
+        m_TargetAssemblyTypeName: PlayerCtrl, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3b4961f0-ab62-45fc-b8d4-bcd91235371d
+    m_ActionName: Play/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 04481a2e-8add-4ad7-adf6-ed088fed80a9
+    m_ActionName: Play/Attack[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Play
