@@ -43,6 +43,10 @@ public class PlayerCtrl : MonoBehaviour
     /// 重力常數
     /// </summary>
     public float G => 9.8f;
+    /// <summary>
+    /// 角色動能包含：水平和垂直重力
+    /// </summary>
+    public Vector3 Velocity => transform.forward * moveSpeed * input.magnitude + Vector3.up * speedV;
     #endregion 角色公開狀態
 
     #region UNITY生命週期
@@ -74,18 +78,11 @@ public class PlayerCtrl : MonoBehaviour
         //轉動角色
         look.z = input.y;
         look.x = input.x;
-        
-        //有移動操作產生時
-        if (isMove)
-        {
-            //角色控制框轉向操作方向
-            transform.rotation = Quaternion.LookRotation(look);
-            //角色控制器.移動(往前)
-            charCtrl.SimpleMove(transform.forward * moveSpeed * input.magnitude);
-        }
-        //地心引力(標準化 1/FPS)
+        //有移動操作時角色控制框轉向操作方向
+        if (isMove) transform.rotation = Quaternion.LookRotation(look);
+        //角色控制器.移動(往前) + 地心引力(標準化 1/FPS)
         speedV -= G * Time.deltaTime;
-        charCtrl.Move(Vector3.up * speedV * Time.deltaTime);
+        charCtrl.Move(Velocity * Time.deltaTime);
     }
 
     public void Move(CallbackContext callback)
