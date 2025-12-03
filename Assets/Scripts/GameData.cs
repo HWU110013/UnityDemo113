@@ -4,7 +4,13 @@ using UnityEngine;
 
 public static class GameData
 {
-    public static int hp;
-    public static int hpMax;
-
+    public static int hp = 30;
+    public static int hpMax = 100;
+    public static float hpFillAmount
+    {
+        get
+        {
+            return (float)hp / (float)hpMax;
+        }
+    }
 }
