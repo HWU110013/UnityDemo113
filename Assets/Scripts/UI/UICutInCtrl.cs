@@ -17,9 +17,17 @@ public class UICutInCtrl : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    [ContextMenu("開始訊息")]
+    public void StartInfo()
     {
-        
+        cutInText.text = startInfo;
+        animator.SetTrigger("Start");
+    }
+
+    [ContextMenu("結束訊息")]
+    public void EndInfo()
+    {
+        cutInText.text = endInfo;
+        animator.SetTrigger("End");
     }
 }
