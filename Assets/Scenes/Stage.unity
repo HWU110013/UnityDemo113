@@ -3726,6 +3726,7 @@ MonoBehaviour:
   - {fileID: 1979665099}
   got: {r: 1, g: 1, b: 1, a: 1}
   none: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  cutInCtrl: {fileID: 1896230171}
 --- !u!1 &1440562529
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class UIKeyCountCtrl : MonoBehaviour
         UpdateKeyUI();
         //功能託管
         GameData.updateKey = UpdateKeyUI;
+        //UI提示(開始)
+        UICutInCtrl.instance.StartInfo();
     }
 
     public void UpdateKeyUI()
@@ -24,6 +26,11 @@ public class UIKeyCountCtrl : MonoBehaviour
         {
             if (i < GameData.keyCount) keys[i].color = got;
             else keys[i].color = none;
+        }
+        //檢查鑰匙是否滿足過關條件
+        if (GameData.keyCount >= 3)
+        {//UI提示(任務完成)
+            UICutInCtrl.instance.EndInfo();
         }
     }
 }

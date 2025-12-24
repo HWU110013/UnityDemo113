@@ -5,11 +5,21 @@ using UnityEngine.UI;
 
 public class UICutInCtrl : MonoBehaviour
 {
+    /// <summary>
+    /// 全域靜態欄位(唯一)
+    /// </summary>
+    public static UICutInCtrl instance;
+
     public Animator animator;
 
     public Text cutInText;
     public string startInfo;
     public string endInfo;
+
+    private void Awake()
+    {//一醒來就先設定(必須)
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
