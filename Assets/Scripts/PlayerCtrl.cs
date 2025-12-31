@@ -66,10 +66,13 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         Action();
-        animator.SetBool("IsMove", isMove);
-        animator.SetBool("IsGround", isGrounded);
-        animator.SetFloat("BlendInput", input.magnitude);
-        animator.SetFloat("VelocityY", VelocityY);
+        if (animator != null)
+        {
+            animator.SetBool("IsMove", isMove);
+            animator.SetBool("IsGround", isGrounded);
+            animator.SetFloat("BlendInput", input.magnitude);
+            animator.SetFloat("VelocityY", VelocityY);
+        }
     }
     #endregion UNITY生命週期
 
@@ -103,7 +106,10 @@ public class PlayerCtrl : MonoBehaviour
             Debug.Log("從地面起跳");
             speedV = Mathf.Sqrt(2 * jumpHeight * G);
             //觸發動畫
-            animator.SetTrigger("Jump");
+            if (animator != null)
+            {
+                animator.SetTrigger("Jump");
+            }
         }
     }
     #endregion 操作設計
